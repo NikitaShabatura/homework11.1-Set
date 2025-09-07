@@ -1,3 +1,5 @@
+import practice.EmailList;
+
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +20,7 @@ public class Main {
     */
 
     public static void main(String[] args) {
+        EmailList emailList = new EmailList();
         Scanner scanner = new Scanner(System.in);
         
         while (true) {
@@ -27,7 +30,23 @@ public class Main {
             }
             
             //TODO: write code here
-            
+
+            if (input.equals("LIST")) {
+                for (String email : emailList.getSortedEmails()) {
+                    System.out.println(email);
+                }
+                continue;
+            }
+
+            if (input.substring(0, input.indexOf(' ')).equals("ADD")) {
+                int spase = input.indexOf(' ');
+                String email = input.substring(spase + 1);
+                if (!emailList.regexEmail(email)) {
+                    System.out.println(WRONG_EMAIL_ANSWER);
+                    continue;
+                }
+                emailList.add(email);
+            }
         }
     }
 }
